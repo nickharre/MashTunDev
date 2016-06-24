@@ -1,0 +1,58 @@
+<ion-view title="Customers" hide-back-button="false" id="page13" class=" ">
+    
+    <ion-subheader-bar class="bar bar-subheader item-input-inset">
+          <input type="text" placeholder="Search for a customer" ng-model="search" style="width:50%" />
+        
+            <button class="button ion-plus pull-right button-stable" ng-click="openModal()" style="width:25%"> Add Customer</button>
+        
+        </ion-subheader-bar>
+    
+    <ion-content padding="true" class="has-header has-subheader">
+    
+          <br>
+        
+        <ion-list>
+            <ion-item collection-repeat="customer in customers | filter:user.password.email | filter:search| orderBy:'name'" type="item-text-wrap">
+            <h2>{{customer.name}}</h2>
+                <p>{{customer.contactPerson}} | {{customer.contactNumber}}</p>
+            </ion-item>
+        </ion-list>
+    
+        <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-dark">
+          <h1 class="title">Add Customer</h1>
+          <button class="button button-primary ion-close" ng-click="modal.hide()"></button>
+        </ion-header-bar>
+        <ion-content class="padding">
+        <br>
+            
+        <form ng-submit="addCustomer(data)">
+            <form>
+        <label>Customer Name:
+        <input ng-model='data.name' type='text' id='nameInput' placeholder="Name"/>
+        </label>
+        <label>Customer Address:
+        <input ng-model='data.address' type='text' id='addressInput' placeholder="Address"/>
+        </label>
+        <label>Contact Person:
+        <input ng-model='data.contactPerson' type='text' id='contactPersonInput' placeholder="Contact Name"/>
+        </label>
+        <label>Contact Number:
+        <input ng-model='data.contactNumber' type='text' id='contactNumberInput' placeholder="Contact Number"/>
+        </label>
+        
+        
+        <br>
+        <center> 
+        <button class="button button-block ion-plus pull-right button-assertive" type="submit" style="width:50%"> Add Customer</button>
+        </center>
+            </div>
+        </form>
+            
+        </ion-content>
+      </ion-modal-view>
+    </script>
+    
+    </ion-content>
+</ion-view>
