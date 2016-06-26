@@ -1,5 +1,6 @@
 <ion-view title="Kegs" hide-back-button="true" id="page11" class=" ">
     <ion-subheader-bar class="bar bar-subheader item-input-inset">
+        <i class="icon ion-ios-search placeholder-icon"></i>
           <input type="search" placeholder="Search for a keg" ng-model="search" style="width:50%" />
          
         <button class="button ion-plus pull-right button-stable" ng-click="openModal()" style="width:25%"> Add Keg</button>
@@ -69,7 +70,7 @@
         </ion-list>
         
         <center> 
-        <button class="button button-block button-small ion-plus pull-right button-stable" ng-click="newCustomer()" style="width:50%"></button>
+        <button class="button button-clear ion-plus button-stable" ng-click="newCustomer()" style="width:50%"></button>
         </center>
         
     </ion-content>
@@ -92,6 +93,10 @@
             </ion-item>
         </ion-list>
         
+        <center> 
+        <button class="button button-clear ion-plus button-stable" ng-click="newBeer()" style="width:50%"></button>
+        </center>
+        
     </ion-content>
   </ion-popover-view>
     </script>
@@ -102,8 +107,8 @@
     <ion-footer-bar>
     
 
-        <button class="button ion-paper-airplane button-stable button-clear" ng-click="openSendPopover($event)" style="width:50%"> Send to {{selectedName}}</button>
-        <button class="button ion-soup-can button-stable button-clear" ng-click="openFillPopover($event)" style="width:50%"> Fill with {{selectedBeer}}</button>
+        <button class="button ion-paper-airplane button-assertive button-clear" ng-click="openSendPopover($event)" style="width:50%"> Send to {{selectedName}}</button>
+        <button class="button ion-soup-can button-assertive button-clear" ng-click="openFillPopover($event)" style="width:50%"> Fill with {{selectedBeer}}</button>
         
     </ion-footer-bar>
     

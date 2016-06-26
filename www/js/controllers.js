@@ -31,11 +31,20 @@ angular.module('app.controllers', [])
     
     //FILL KEG FUNCTION
     $scope.fill = function(keg){
+        
+        
+        var beerName = $scope.selectedBeer;
+        
+        if(beerName == null){
+            alert("No beer selected");
+        $ionicListDelegate.closeOptionButtons();
+        }
+        else{
         keg.contents = $scope.selectedBeer;
         keg.updated = Date.now();
         $scope.kegs.$save(keg);   
         $ionicListDelegate.closeOptionButtons();
-        
+        }
     };
     
     
@@ -125,16 +134,18 @@ angular.module('app.controllers', [])
     //SEND KEG FUNCTION
     $scope.send = function(keg){
         
-        if(name==""){
-            alert('No send location selected');
+        var customerName = $scope.selectedName;
+        
+        if(customerName == null){
+            alert("No customer selected");
+            $ionicListDelegate.closeOptionButtons();
         }
-        else {
+      else{
         keg.location = $scope.selectedName;
         keg.updated = Date.now();
         $scope.kegs.$save(keg); 
-        
-        $ionicListDelegate.closeOptionButtons();
-        }
+        $ionicListDelegate.closeOptionButtons(); 
+      }
     };
     
     //DEFINE RECEIVING CUSTOMER
@@ -152,6 +163,12 @@ angular.module('app.controllers', [])
     //CUSTOMER NOT IN SEND LIST
     $scope.newCustomer = function(){
         $state.go('mainMenu.customers');
+        $scope.popover.hide();
+    }
+    
+    //BEER NOT IN SEND LIST
+    $scope.newBeer = function(){
+        $state.go('mainMenu.beers');
         $scope.popover.hide();
     }
     
@@ -255,7 +272,8 @@ angular.module('app.controllers', [])
         password : data.password
 }, function(error, authData) {
   if (error) {
-    console.log("Login Failed!", error);
+        alert("Incorrect user or password");
+      console.log("Login Failed!", error);
   } else {
     console.log("Authenticated successfully with payload:", authData);
     $scope.user = Users.ref().getAuth(); 
@@ -275,7 +293,12 @@ angular.module('app.controllers', [])
 
 })
  
-.controller('accountCtrl', function($scope) {
+.controller('accountCtrl', function($scope,$state, Users) {
+    
+    $scope.logout=function(){
+    Users.ref().unauth();
+    $state.go('login');
+    }
      
 
 })
